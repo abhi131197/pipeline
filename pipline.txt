@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Initial') {
+            steps {
+                input 'Want to launch EC2 instance??'
+            }
+        }
+        stage('Deploy') {
+            steps {
+	        script{ ansiblePlaybook becomeUser: null, colorized: true, disableHostKeyChecking: true, installation: 'Ansible', inventory: '/etc/ansible/hosts', playbook: '/etc/ansible/ec2.yml', sudoUser: null
+s }
+            }
+        }
+   
+    }
+}
